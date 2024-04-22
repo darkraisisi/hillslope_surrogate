@@ -98,7 +98,7 @@ def model_training(mode='all'):
     train_nn_time = (train_nn_end - train_nn_start)/60
     print('NN training time: {:.3g} minutes.'.format(train_nn_time))
 
-    nnetwork.save(paths.models / 'nn_model.h5')
+    nnetwork.save(paths.models / 'nn_model.keras')
     print('Successfully completed Neural Network training.')
 
     # Retrieve the loss name

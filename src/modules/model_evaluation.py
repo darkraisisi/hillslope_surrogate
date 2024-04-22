@@ -10,7 +10,7 @@ from sklearn.metrics import r2_score
 def model_evaluation(mode='all'):
 
   # Load the models
-  nnetwork = load_model(paths.models / 'nn_model.h5', compile=False)
+  nnetwork = load_model(paths.models / 'nn_model.keras', compile=False)
   rforest = jb.load(paths.models / 'rf_model.joblib')
 
   # Initialize the summaries

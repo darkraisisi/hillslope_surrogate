@@ -9,7 +9,7 @@ def tipping_evolution(name='nn'):
 
   # Load the model
   if name == 'nn':
-    model = load_model(paths.models / 'nn_model.h5', compile=False)
+    model = load_model(paths.models / 'nn_model.keras', compile=False)
   elif name == 'rf':
     model = jb.load(paths.models / 'rf_model.joblib')
 

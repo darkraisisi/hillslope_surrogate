@@ -4,7 +4,7 @@ from pathlib import Path
 
 @dataclass(frozen=True)
 class main:
-    model_training: str = 'all'    # 'none', 'rf', 'nn' or 'all'.
+    model_training: str = 'nn'    # 'none', 'rf', 'nn' or 'all'.
     model_evaluation: str = 'all'  # 'none', 'train', 'test' or 'all'
     fwd_sim: tuple = ()   # Folder names in fwd_sim, e.g. ('train_sim', 'test_sim')
     plots: tuple = ('surface', 'colormesh')   # ['surface', 'colormesh', 'tipping']
@@ -43,7 +43,7 @@ class model_training:
             'units': (9, 27, 81, 162, 324, 648, 1296),
             'act_fun': 'relu',
             'learning_rate': 1E-5,
-            'batch_size': 128,
+            'batch_size': 2 ** 12,
             'l1_reg': 1e-5,
             'n_epochs': 200
         }
