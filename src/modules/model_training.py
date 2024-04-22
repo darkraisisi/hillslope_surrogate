@@ -4,8 +4,7 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 import tensorflow as tf
-from tensorflow import keras
-from keras import backend as K
+from tensorflow.keras import backend as K
 import matplotlib.pyplot as plt
 import joblib as jb
 from .surface_plots import surface_plots
@@ -68,14 +67,14 @@ def model_training(mode='all'):
       print('Successfully tuned hyperparameters.')
 
     # Define the model
-    nnetwork = keras.Sequential()
+    nnetwork = tf.keras.Sequential()
     for n_units in hp['units']:
       nnetwork.add(tf.keras.layers.Dense(units=n_units, activation=hp['act_fun'],
-                                        kernel_regularizer=keras.regularizers.l1(hp['l1_reg'])))
-    nnetwork.add(keras.layers.Dense(2, activation='linear',
-                                    kernel_regularizer=keras.regularizers.l1(hp['l1_reg'])))
+                                        kernel_regularizer=tf.keras.regularizers.l1(hp['l1_reg'])))
+    nnetwork.add(tf.keras.layers.Dense(2, activation='linear',
+                                    kernel_regularizer=tf.keras.regularizers.l1(hp['l1_reg'])))
     # Compile and fit the model
-    nnetwork.compile(optimizer=keras.optimizers.Adam(learning_rate=hp['learning_rate']), loss=custom_mae)
+    nnetwork.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=hp['learning_rate']), loss=custom_mae)
     train_nn_start = time.time()
     history = nnetwork.fit(X_train, y_train, epochs = hp['n_epochs'], validation_data = (X_val, y_val),
                                batch_size = hp['batch_size'])
@@ -157,15 +156,15 @@ def hp_tuning(train_val_data, hp, loss, tuning_hp_name, tuning_hp_vals):
     hp[tuning_hp_name] = value
 
     # Define the model
-    nnetwork = keras.Sequential()
+    nnetwork = tf.keras.Sequential()
     for n_units in hp['units']:
       nnetwork.add(tf.keras.layers.Dense(units=n_units, activation=hp['act_fun'],
-                                        kernel_regularizer=keras.regularizers.l1(hp['l1_reg'])))
-    nnetwork.add(keras.layers.Dense(2, activation='linear',
-                                    kernel_regularizer=keras.regularizers.l1(hp['l1_reg'])))
+                                        kernel_regularizer=tf.keras.regularizers.l1(hp['l1_reg'])))
+    nnetwork.add(tf.keras.layers.Dense(2, activation='linear',
+                                    kernel_regularizer=tf.keras.regularizers.l1(hp['l1_reg'])))
 
     # Compile and fit the model
-    nnetwork.compile(optimizer=keras.optimizers.Adam(learning_rate=hp['learning_rate']), loss=loss)
+    nnetwork.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=hp['learning_rate']), loss=loss)
     history = nnetwork.fit(X_tuning, y_tuning, epochs = hp['n_epochs'], validation_data = (X_val, y_val), 
                           batch_size = hp['batch_size'])
     
